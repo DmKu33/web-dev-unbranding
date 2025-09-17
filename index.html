@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Cursor vs APIs</title>
+    <title>The Great API Assembly & VS Code Fork</title>
     <style>
         body {
             margin: 0;
@@ -14,9 +14,56 @@
         canvas {
             display: block;
         }
+        
+        .controls {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .title {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .subtitle {
+            position: absolute;
+            top: 95px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ccc;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        .instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #888;
+            font-size: 12px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+    <div class="controls">Click anywhere on left or right side to spin blocks independently</div>
+    <div class="title">The Great API Assembly & VS Code Fork</div>
+    <div class="subtitle">The tale of "Visionary Product"</div>
+    <div class="instructions">
+        Hover over the left block to see commentary
+    </div>
     <canvas id="canvas"></canvas>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -24,17 +71,20 @@
         let scene, camera, renderer;
         
         function init() {
-
+            // Scene
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0x000000);
             
+            // Camera
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.set(0, 0, 8);
             
+            // Renderer
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
             
+            // Lighting
             const light = new THREE.DirectionalLight(0xffffff, 1);
             light.position.set(5, 5, 5);
             scene.add(light);
