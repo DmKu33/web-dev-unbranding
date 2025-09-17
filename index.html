@@ -69,6 +69,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         let scene, camera, renderer, leftBlock, rightBlock;
+        let leftSpinning = false, rightSpinning = false;
+        let leftClickArea, rightClickArea;
         
         function init() {
             // Scene
@@ -90,9 +92,15 @@
             scene.add(light);
             scene.add(new THREE.AmbientLight(0x404040, 0.6));
             
-            // Create blocks
+            // blocks
             createLeftBlock();
             createRightBlock();
+            
+            // click areas for interaction
+            createClickAreas();
+            
+            // controls
+            setupControls();
             
             animate();
         }
@@ -175,9 +183,73 @@
             });
         }
         
+        function createClickAreas() {
+            // big invisible click areas for spinning blocks
+            const clickGeometry = new THREE.BoxGeometry(6, 4, 6);
+            const invisibleMaterial = new THREE.MeshBasicMaterial({ 
+                transparent: true, 
+                opacity: 0,
+                visible: false 
+            });
+            
+            leftClickArea = new THREE.Mesh(clickGeometry, invisibleMaterial);
+            leftClickArea.position.set(-4, 1, 0);
+            leftClickArea.userData = { side: 'left' };
+            scene.add(leftClickArea);
+            
+            rightClickArea = new THREE.Mesh(clickGeometry, invisibleMaterial);
+            rightClickArea.position.set(4, 1, 0);
+            rightClickArea.userData = { side: 'right' };
+            scene.add(rightClickArea);
+        }
+        
+        function setupControls() {
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+            
+            renderer.domElement.onclick = (event) => {
+                // mouse position in normalized device coordinates for raycasting
+                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                
+                raycaster.setFromCamera(mouse, camera);
+                
+                // intersection with click areas for spinning blocks
+                const intersects = raycaster.intersectObjects([leftClickArea, rightClickArea]);
+                
+                if (intersects.length > 0) {
+                    const clickedArea = intersects[0].object;
+                    
+                    if (clickedArea.userData.side === 'left') {
+                        leftSpinning = !leftSpinning;
+                    } else if (clickedArea.userData.side === 'right') {
+                        rightSpinning = !rightSpinning;
+                    }
+                }
+            };
+            
+            // Q and E to spin blocks
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'q' || event.key === 'Q') {
+                    leftSpinning = !leftSpinning;
+                } else if (event.key === 'e' || event.key === 'E') {
+                    rightSpinning = !rightSpinning;
+                }
+            });
+        }
+        
         
         function animate() {
             requestAnimationFrame(animate);
+            
+            // spin blocks if activated
+            if (leftSpinning) {
+                leftBlock.rotation.y += 0.02;
+            }
+            if (rightSpinning) {
+                rightBlock.rotation.y += 0.02;
+            }
+            
             renderer.render(scene, camera);
         }
         
