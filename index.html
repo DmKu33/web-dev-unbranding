@@ -71,6 +71,7 @@
         let scene, camera, renderer, leftBlock, rightBlock;
         let leftSpinning = false, rightSpinning = false;
         let leftClickArea, rightClickArea;
+        let personMesh, speechBubble, speechText;
         
         function init() {
             // Scene
@@ -99,6 +100,8 @@
             // click areas for interaction
             createClickAreas();
             
+            createPersonAndSpeechBubble();
+        
             // controls
             setupControls();
             
@@ -347,13 +350,6 @@
             scene.add(speechText);
         }
         
-        
-            
-
-            
-
-        
-        
         function animate() {
             requestAnimationFrame(animate);
             
@@ -373,7 +369,7 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         };
-        
+
         init();
     </script>
 </body>
