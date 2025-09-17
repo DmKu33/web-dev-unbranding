@@ -1,15 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- meta tags, links to css, etc. -->
     <meta charset="utf-8">
-    <title>Unbranding</title>
+    <title>Cursor vs APIs</title>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            font-family: monospace;
+            overflow: hidden;
+        }
+        
+        canvas {
+            display: block;
+        }
+    </style>
 </head>
 <body>
+    <canvas id="canvas"></canvas>
 
-    <!-- visible content goes here -->
-	<h1>Unbranding</h1>
-	<p>See README.md for info</p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let scene, camera, renderer;
+        
+        function init() {
 
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
+            
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 0, 8);
+            
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+            
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(5, 5, 5);
+            scene.add(light);
+            scene.add(new THREE.AmbientLight(0x404040, 0.6));
+            
+            animate();
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        
+        window.onresize = () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        };
+        
+        init();
+    </script>
 </body>
 </html>
