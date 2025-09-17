@@ -171,7 +171,7 @@
                 { file: 'anthropic.png', pos: [0, 0, 1.01], rot: [0, 0, 0] }, // front
                 { file: 'gemini_2.png', pos: [1.01, 0, 0], rot: [0, Math.PI/2, 0] }, // right
                 { file: 'openai.png', pos: [0, 0, -1.01], rot: [0, Math.PI, 0] }, // back
-                { file: 'meta.png', pos: [-1.01, 0, 0], rot: [0, -Math.PI/2, 0] } // left
+                { file: 'vscode.png', pos: [-1.01, 0, 0], rot: [0, -Math.PI/2, 0] } // left
             ];
             
             logoData.forEach((data, index) => {
@@ -240,7 +240,7 @@
                 }
             });
 
-            // hover  for speech bubble
+            // hover for speech bubble
             renderer.domElement.onmousemove = (event) => {
             
                 mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -369,6 +369,18 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         };
+
+        console.log('STATEMENT');
+        console.log(
+        'This piece explores the subvertising of Cursor --> a VS Code fork fused with with API calls for AI Models.'
+        );
+        console.log('');
+        console.log('MOTIVATION: The work question the "visionary" aspect of Cursor, as it being rather a product iteration of Copilot.');
+        console.log('');
+        console.log('RESEARCH SOURCES:');
+        console.log('- OpenAI, Anthropic, Google, VS Code, and Cursor logos');
+        console.log('- Lego documentation');
+
 
         init();
     </script>
