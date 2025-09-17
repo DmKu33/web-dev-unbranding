@@ -108,6 +108,7 @@
             animate();
         }
         
+        // use Claude + Official Lego Specs + Codepen to experiment and make this work 
         function createLeftBlock() {
             leftBlock = new THREE.Group();
             
@@ -186,6 +187,7 @@
             });
         }
         
+        // got help with Claude + Documentations to understand raycasting for click areas and overal controls & interactivity 
         function createClickAreas() {
             // big invisible click areas for spinning blocks
             const clickGeometry = new THREE.BoxGeometry(6, 4, 6);
@@ -205,6 +207,7 @@
             rightClickArea.userData = { side: 'right' };
             scene.add(rightClickArea);
         }
+        
         
         function setupControls() {
             const raycaster = new THREE.Raycaster();
@@ -377,11 +380,11 @@
         console.log('');
         console.log('MOTIVATION: The work question the "visionary" aspect of Cursor, as it being rather a product iteration of Copilot.');
         console.log('');
-        console.log('RESEARCH SOURCES:');
+        console.log('SOURCES:');
         console.log('- OpenAI, Anthropic, Google, VS Code, and Cursor logos');
         console.log('- Lego documentation');
-
-
+        console.log('- ThreeJS documentation');
+        console.log('');
         init();
     </script>
 </body>
