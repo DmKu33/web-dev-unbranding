@@ -274,7 +274,7 @@
                 const personGeometry = new THREE.PlaneGeometry(1.5, 2);
                 personMesh = new THREE.Mesh(personGeometry, personMaterial);
                 
-                personMesh.position.set(-1.5, -0.5, 1.5); 
+                personMesh.position.set(-1.2, -0.8, 1.5); 
                 personMesh.lookAt(camera.position); 
                 scene.add(personMesh);
             });
@@ -284,11 +284,11 @@
                     map: texture,
                     transparent: true
                 });
-                const bubbleGeometry = new THREE.PlaneGeometry(2.5, 1.5);
+                const bubbleGeometry = new THREE.PlaneGeometry(3, 1.5);
                 speechBubble = new THREE.Mesh(bubbleGeometry, bubbleMaterial);
                 
               
-                speechBubble.position.set(-0.5, 0.8, 1.5); 
+                speechBubble.position.set(-0.1, 0.65, 1.5); 
                 speechBubble.lookAt(camera.position);
                 speechBubble.visible = false; 
                 scene.add(speechBubble);
